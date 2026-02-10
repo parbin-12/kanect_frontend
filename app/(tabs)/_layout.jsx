@@ -8,27 +8,41 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: "orange",
-        tabBarInactiveTintColor: "grey",
+        tabBarActiveTintColor: "white", 
+        tabBarInactiveTintColor: "grey", 
         tabBarShowLabel: true,
         tabBarLabelStyle: { fontSize: 12, fontWeight: "600" },
         tabBarStyle: {
           position: "absolute",
-          backgroundColor: Platform.OS === "ios" ? "transparent" : "white",
+          backgroundColor: Platform.OS === "ios" ? "transparent" : "black", 
           borderTopWidth: 0,
-          elevation: 5,
+          elevation: 10,
           height: 70,
-          bottom: 10, 
+          bottom: 10,
+          marginHorizontal: 16,
+          borderRadius: 20,
+          shadowColor: "#000",
+          shadowOpacity: 0.05,
+          shadowOffset: { width: 0, height: 3 },
+          shadowRadius: 6,
         },
         tabBarBackground: () =>
-          Platform.OS === "ios" ? <BlurView tint="light" intensity={70} style={{ flex: 1 }} /> : null,
+          Platform.OS === "ios" ? (
+            <BlurView
+              tint="light"
+              intensity={80}
+              style={{ flex: 1, borderRadius: 20, marginHorizontal: 16 }}
+            />
+          ) : null,
       }}
     >
       <Tabs.Screen
         name="Home"
         options={{
           title: "Home",
-          tabBarIcon: ({ color, size }) => <Ionicons name="home" size={size} color={color} />,
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="home" size={size} color={color} />
+          ),
         }}
       />
 
@@ -36,7 +50,9 @@ export default function TabLayout() {
         name="Network"
         options={{
           title: "Network",
-          tabBarIcon: ({ color, size }) => <Ionicons name="people" size={size} color={color} />,
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="people" size={size} color={color} />
+          ),
         }}
       />
 
@@ -44,15 +60,19 @@ export default function TabLayout() {
         name="Create"
         options={{
           title: "Create",
-          tabBarIcon: ({ color, size }) => <Ionicons name="add-circle" size={36} color={color} />,
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="add-circle" size={36} color={color} />
+          ),
         }}
       />
 
       <Tabs.Screen
-        name="AboutMe" 
+        name="AboutMe"
         options={{
-          title: "About Me", 
-          tabBarIcon: ({ color, size }) => <Ionicons name="person" size={size} color={color} />,
+          title: "About Me",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="person" size={size} color={color} />
+          ),
         }}
       />
     </Tabs>

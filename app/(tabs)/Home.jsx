@@ -11,16 +11,11 @@ import {
   Modal,
   TouchableOpacity,
   Animated,
-  Easing,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import axios from "axios";
-import { BlurView } from "expo-blur";
 
 const BACKEND_URL = "https://kanect-backend.onrender.com/api/questions";
-
-
-
 
 export default function Home() {
   const [questions, setQuestions] = useState([]);
@@ -51,7 +46,7 @@ export default function Home() {
 
   const AnimatedCard = ({ children, index }) => {
     const fadeAnim = useRef(new Animated.Value(0)).current;
-    const scaleAnim = useRef(new Animated.Value(0.9)).current;
+    const scaleAnim = useRef(new Animated.Value(0.95)).current;
 
     useEffect(() => {
       Animated.parallel([
@@ -78,8 +73,8 @@ export default function Home() {
 
   const QuestionCard = ({ item, index }) => (
     <AnimatedCard index={index}>
-      <BlurView intensity={30} tint="light" style={styles.card}>
-        <Text style={styles.questionText}>{item.text}</Text>
+      <View style={styles.card}>
+        <Text style={styles.questionText}>📝 {item.text}</Text>
 
         {item.image && (
           <TouchableOpacity
@@ -98,29 +93,41 @@ export default function Home() {
         {item.tags && item.tags.length > 0 && (
           <View style={styles.tagsContainer}>
             {item.tags.map((tag, i) => (
-              <Animated.View key={i} style={styles.tag}>
-                <Text style={styles.tagText}>#{tag}</Text>
-              </Animated.View>
+              <View key={i} style={styles.tag}>
+                <Text style={styles.tagText}>🏷️ {tag}</Text>
+              </View>
             ))}
           </View>
         )}
-      </BlurView>
+      </View>
     </AnimatedCard>
   );
 
   return (
     <View style={{ flex: 1 }}>
-      <SafeAreaView style={styles.container} edges={["top", "left", "right"]}>
-        <StatusBar barStyle="light-content" />
+      <SafeAreaView style={styles.container}>
+        <StatusBar barStyle="dark-content" />
 
-        <Animated.View style={styles.headerSection}>
-          <Text style={styles.header}>KΛNΞCT⚡</Text>
-          <Text style={styles.subHeader}>Past Questions</Text>
-        </Animated.View>
+        {/* HEADER */}
+        <View style={styles.headerSection}>
+          <Text style={styles.header}>KΛNΞCT ⚡</Text>
+          <Text style={styles.subHeader}>Past Questions Hub</Text>
+        </View>
+
+        {/* PURPOSE */}
+        <View style={styles.purposeBox}>
+          <Text style={styles.purposeTitle}>Why Kanect?</Text>
+          <Text style={styles.purposeText}>
+            Kanect helps students find past and supplementary exam questions in
+            one place and connects students travelling from stations so no one
+            feels lost or alone. Questions are uploaded by admins and appear
+            here instantly for everyone.
+          </Text>
+        </View>
 
         {loading ? (
           <View style={styles.loader}>
-            <ActivityIndicator size="large" color="#4F46E5" />
+            <ActivityIndicator size="large" color="#000000" />
             <Text style={styles.loadingText}>Loading questions...</Text>
           </View>
         ) : (
@@ -129,12 +136,12 @@ export default function Home() {
             keyExtractor={(item) => item._id}
             renderItem={({ item, index }) => <QuestionCard item={item} index={index} />}
             showsVerticalScrollIndicator={false}
-            contentContainerStyle={{ paddingBottom: 100 }}
+            contentContainerStyle={{ paddingBottom: 120 }}
             refreshControl={
               <RefreshControl
                 refreshing={refreshing}
                 onRefresh={onRefresh}
-                tintColor="#4F46E5"
+                tintColor="#000000"
               />
             }
             ListEmptyComponent={
@@ -146,6 +153,7 @@ export default function Home() {
         )}
       </SafeAreaView>
 
+      {/* IMAGE PREVIEW */}
       <Modal
         visible={!!previewImage}
         transparent
@@ -174,26 +182,48 @@ export default function Home() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "green",
+    
+    backgroundColor: "#E0F2FE",
     paddingHorizontal: 16,
-    
-    
-    
   },
 
   headerSection: {
-    marginVertical: 10,
+    marginTop: 10,
+    alignItems: "center",
   },
   header: {
-    fontSize: 32,
-    fontWeight: "800",
-    color: "orange",
-    
-    alignSelf:"center"
+    fontSize: 28,
+    fontWeight: "900",
+    color: "#2563EB",
   },
   subHeader: {
     fontSize: 14,
-    color: "#10B981",
+    color: "#6B7280",
+    marginTop: 4,
+  },
+
+  purposeBox: {
+    marginTop: 14,
+    backgroundColor: "black",
+    borderRadius: 16,
+    padding: 14,
+    borderWidth: 1,
+    borderColor: "#E5E7EB",
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 6,
+  },
+  purposeTitle: {
+    fontSize: 16,
+    fontWeight: "800",
+    color: "white",
+    marginBottom: 6,
+  },
+  purposeText: {
+    fontSize: 13,
+    color: "white",
+    lineHeight: 18,
   },
 
   loader: {
@@ -203,7 +233,7 @@ const styles = StyleSheet.create({
   },
   loadingText: {
     marginTop: 10,
-    color: "#9CA3AF",
+    color: "#6B7280",
   },
 
   empty: {
@@ -212,26 +242,26 @@ const styles = StyleSheet.create({
   },
   emptyText: {
     fontSize: 16,
-    color: "#9CA3AF",
+    color: "#6B7280",
   },
 
   card: {
-    backgroundColor: "rgba(255,255,255,0.95)",
-    borderRadius: 16,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 12,
     padding: 14,
     marginBottom: 16,
     borderWidth: 1,
-    borderColor: "rgba(0,0,0,0.05)",
+    borderColor: "red",
     shadowColor: "#000",
-    shadowOpacity: 0.20,
-    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.05,
+    shadowOffset: { width: 0, height: 2 },
     shadowRadius: 6,
   },
 
   questionText: {
     fontSize: 16,
     fontWeight: "600",
-    color: "#1F2937",
+    color: "#111827",
     lineHeight: 22,
   },
 
@@ -255,7 +285,7 @@ const styles = StyleSheet.create({
   },
 
   tag: {
-    backgroundColor: "#EEF2FF",
+    backgroundColor: "#E5E7EB",
     paddingHorizontal: 12,
     paddingVertical: 5,
     borderRadius: 20,
@@ -266,10 +296,9 @@ const styles = StyleSheet.create({
   tagText: {
     fontSize: 12,
     fontWeight: "700",
-    color: "#4338CA",
+    color: "#111827",
   },
 
-  /* MODAL */
   modalContainer: {
     flex: 1,
     backgroundColor: "rgba(0,0,0,0.95)",
@@ -284,7 +313,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 50,
     right: 20,
-    zIndex: 10,
   },
   closeText: {
     fontSize: 28,

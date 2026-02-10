@@ -148,18 +148,18 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     padding: 20,
-    backgroundColor:"black",
+    backgroundColor:"#E0F2FE",
     opacity:0.80
   },
   title: {
-    color: "#fff",
+    color: "black",
     fontSize: 26,
     fontWeight: "bold",
     marginBottom: 16,
     alignSelf: "center",
   },
   disclaimer: {
-    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    backgroundColor: "black",
     borderLeftWidth: 4,
     borderLeftColor: "#facc15",
     padding: 12,
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
   },
   input: {
     backgroundColor: "rgba(255,255,255,0.05)",
-    color: "#fff",
+    color: "black",
     borderWidth: 1,
     borderColor: "#444",
     padding: 12,
@@ -181,14 +181,14 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   blueBtn: {
-    backgroundColor: "#1e90ff",
+    backgroundColor: "black",
     padding: 14,
     borderRadius: 6,
     alignItems: "center",
     marginBottom: 12,
   },
   greenBtn: {
-    backgroundColor: "#2ecc71",
+    backgroundColor: "orange",
     padding: 14,
     borderRadius: 6,
     alignItems: "center",

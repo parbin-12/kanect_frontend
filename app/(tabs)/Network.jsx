@@ -72,8 +72,8 @@ export default function Network() {
         name,
         phone,
         note,
-        time: time.toISOString(), 
-        createdAt: new Date().toISOString(), 
+        time: time.toISOString(),
+        createdAt: new Date().toISOString(),
       });
 
       setName("");
@@ -89,19 +89,19 @@ export default function Network() {
     <View style={styles.card}>
       <View style={styles.cardMain}>
         <View>
-          <Text style={styles.name}>{item.name}</Text>
+          <Text style={styles.name}>👤 {item.name}</Text>
           <Text style={styles.phone}>📞 {item.phone}</Text>
         </View>
 
         <View style={styles.timeBadge}>
-          <Text style={styles.timeText}>{formatTime(item.time)}</Text>
-          <Text style={styles.dateText}>{formatDate(item.time)}</Text>
+          <Text style={styles.timeText}>🕒 {formatTime(item.time)}</Text>
+          <Text style={styles.dateText}>📅 {formatDate(item.time)}</Text>
         </View>
       </View>
 
       {item.note ? (
         <View style={styles.noteContainer}>
-          <Text style={styles.noteText}>{item.note}</Text>
+          <Text style={styles.noteText}>📝 {item.note}</Text>
         </View>
       ) : null}
     </View>
@@ -112,8 +112,7 @@ export default function Network() {
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={styles.container}
     >
-      <StatusBar barStyle="light-content" />
-
+      <StatusBar barStyle="dark-content" />
       <FlatList
         data={posts}
         keyExtractor={(item) => item._id}
@@ -123,27 +122,27 @@ export default function Network() {
         contentContainerStyle={styles.list}
         ListHeaderComponent={
           <>
-            
+            {/* Header */}
             <View style={styles.header}>
-              <Text style={styles.title}>Station Connect🛤️</Text>
+              <Text style={styles.title}>Station Connect 🛤️</Text>
               <Text style={styles.noteInfo}>
-                ⚠️ Posts are temporary and will be automatically deleted after 2 hours.
+                ⚠️ Posts are temporary and auto-delete after 2 hours.
               </Text>
             </View>
 
-            
+            {/* Form */}
             <View style={styles.form}>
               <View style={styles.row}>
                 <TextInput
                   placeholder="Name"
-                  placeholderTextColor="#666"
+                  placeholderTextColor="#999"
                   style={[styles.input, { marginRight: 8 }]}
                   value={name}
                   onChangeText={setName}
                 />
                 <TextInput
                   placeholder="Phone"
-                  placeholderTextColor="#666"
+                  placeholderTextColor="#999"
                   style={styles.input}
                   keyboardType="phone-pad"
                   value={phone}
@@ -153,7 +152,7 @@ export default function Network() {
 
               <TextInput
                 placeholder="Note (optional)"
-                placeholderTextColor="#666"
+                placeholderTextColor="#999"
                 style={styles.input}
                 value={note}
                 onChangeText={setNote}
@@ -165,37 +164,22 @@ export default function Network() {
                   onPress={() => setShowTimePicker(true)}
                 >
                   <Text style={styles.timeButtonText}>
-                    🕒{" "}
-                    {time.toLocaleTimeString([], {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })}
+                    🕒 {time.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
                   </Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity
-                  style={styles.submitBtn}
-                  onPress={createPost}
-                >
-                  <Text style={styles.submitBtnText}>Broadcast</Text>
+                <TouchableOpacity style={styles.submitBtn} onPress={createPost}>
+                  <Text style={styles.submitBtnText}>📣 Broadcast</Text>
                 </TouchableOpacity>
               </View>
             </View>
 
-
-            {loading && (
-              <ActivityIndicator
-                color="#2563EB"
-                style={{ marginBottom: 20 }}
-              />
-            )}
+            {loading && <ActivityIndicator color="#000" style={{ marginBottom: 20 }} />}
           </>
         }
         ListEmptyComponent={
           !loading && (
-            <Text style={styles.empty}>
-              No one has posted from the station yet.
-            </Text>
+            <Text style={styles.empty}>No one has posted from the station yet. 👀</Text>
           )
         }
       />
@@ -217,29 +201,25 @@ export default function Network() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#000000",
+    backgroundColor: "#E0F2FE",
     paddingHorizontal: 16,
-    
   },
 
   header: {
     marginTop: 50,
     marginBottom: 16,
+    alignItems: "center",
   },
   title: {
-    fontSize: 24,
+    fontSize: 26,
     fontWeight: "bold",
-    color: "orange",
-    alignSelf:"center"
-  },
-  subtitle: {
-    fontSize: 14,
-    color: "#B0B0B0",
+    color: "#000",
   },
   noteInfo: {
     fontSize: 12,
-    color: "red",
+    color: "#EF4444",
     marginTop: 4,
+    textAlign: "center",
   },
 
   form: {
@@ -247,15 +227,18 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: "row",
+    
   },
   input: {
     flex: 1,
-    backgroundColor: "orange",
-    borderRadius: 8,
+    backgroundColor: "#F3F4F6",
+    borderRadius: 10,
     padding: 12,
     fontSize: 14,
-    color: "black",
+    color: "#111",
     marginBottom: 10,
+    
+    
   },
 
   actionRow: {
@@ -264,24 +247,25 @@ const styles = StyleSheet.create({
   },
   timeButton: {
     flex: 1,
-    backgroundColor: "#2563EB", 
+    backgroundColor: "#111",
     padding: 12,
-    borderRadius: 8,
+    borderRadius: 10,
     alignItems: "center",
     marginRight: 8,
   },
   timeButtonText: {
-    color: "#FFFFFF",
+    color: "#fff",
     fontWeight: "600",
   },
   submitBtn: {
-    backgroundColor: "#16A34A", 
+    backgroundColor: "#000",
     paddingVertical: 12,
     paddingHorizontal: 20,
-    borderRadius: 8,
+    borderRadius: 10,
+    alignItems: "center",
   },
   submitBtnText: {
-    color: "#FFFFFF",
+    color: "#fff",
     fontWeight: "bold",
   },
 
@@ -290,12 +274,14 @@ const styles = StyleSheet.create({
   },
 
   card: {
-    backgroundColor: "green",
-    borderRadius: 10,
+    backgroundColor: "orange",
+    borderRadius: 12,
     padding: 14,
-    marginBottom: 10,
-    opacity:.70
-  
+    marginBottom: 12,
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 4,
   },
   cardMain: {
     flexDirection: "row",
@@ -304,30 +290,29 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 16,
-    fontWeight: "500",
-    color: "white",
+    fontWeight: "600",
+    color: "#111",
   },
   phone: {
-    fontSize: 15,
-    color: "white",
+    fontSize: 14,
+    color: "#374151",
     marginTop: 2,
   },
 
   timeBadge: {
-    backgroundColor: "black", 
+    backgroundColor: "#E5E7EB",
     paddingHorizontal: 8,
     paddingVertical: 6,
     borderRadius: 8,
     alignItems: "center",
-  
   },
   timeText: {
-    color: "#FFFFFF",
+    color: "#111",
     fontSize: 12,
     fontWeight: "bold",
   },
   dateText: {
-    color: "#FFFFFF",
+    color: "#6B7280",
     fontSize: 10,
     marginTop: 2,
   },
@@ -336,17 +321,17 @@ const styles = StyleSheet.create({
     marginTop: 10,
     paddingTop: 8,
     borderTopWidth: 1,
-    borderTopColor: "#E5E7EB",
+    borderTopColor: "#D1D5DB",
   },
   noteText: {
     fontSize: 13,
-    color: "white",
-    fontStyle: "bold",
+    color: "#111",
   },
 
   empty: {
     textAlign: "center",
-    color: "#9CA3AF",
+    color: "#6B7280",
     marginTop: 40,
+    fontSize: 14,
   },
 });

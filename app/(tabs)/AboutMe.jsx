@@ -9,25 +9,26 @@ import {
   Linking,
   StatusBar,
 } from "react-native";
+import { FontAwesome } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function AboutMe() {
   const links = [
-    { name: "GitHub", url: "https://github.com/parbin-12" },
-    { name: "LinkedIn", url: "https://www.linkedin.com/feed/" },
-    { name: "LeetCode", url: "https://leetcode.com/u/yadavprabin092/" },
-    { name: "CodeChef", url: "https://www.codechef.com/users/pravdev" },
-    { name: "Instagram", url: "https://www.instagram.com/praveen_roy2/" },
+    { icon: <FontAwesome name="github" size={28} color="#fff" />, url: "https://github.com/parbin-12" },
+    { icon: <FontAwesome name="linkedin" size={28} color="#0A66C2" />, url: "https://www.linkedin.com/feed/" },
+    { icon: <MaterialCommunityIcons name="leetcode" size={28} color="#FFA116" />, url: "https://leetcode.com/u/yadavprabin092/" },
+    { icon: <MaterialCommunityIcons name="code-braces" size={28} color="#BF1E2D" />, url: "https://www.codechef.com/users/pravdev" },
+    { icon: <FontAwesome name="instagram" size={28} color="#E1306C" />, url: "https://www.instagram.com/praveen_roy2/" },
   ];
 
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" />
-
       <ScrollView
         contentContainerStyle={styles.content}
         showsVerticalScrollIndicator={false}
       >
-        {/* PROFILE */}
+      
         <View style={styles.profile}>
           <Image
             source={require("../../assets/images/pr.jpg")}
@@ -37,22 +38,12 @@ export default function AboutMe() {
           <Text style={styles.role}>React Native Developer</Text>
         </View>
 
-        {/* ABOUT */}
+       
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>About Me</Text>
           <Text style={styles.aboutText}>
-            I am a Computer Science undergraduate passionate about mobile app
-            development with React Native. I enjoy building clean and
-            user-friendly apps that solve real problems.  
-
-            I am also exploring Artificial Intelligence and Deep Learning,
-            learning to integrate AI/ML concepts into mobile apps.  
-
-            Currently, I focus on backend integration, scalable architectures,
-            and creating smarter, efficient applications.  
-
-            You can find me online, including on Instagram at{" "}
-            <Text style={{ fontWeight: "700" }}>@praveen_roy2</Text>.
+            I am a CSE undergraduate building mobile apps with React Native.
+            Passionate about creating clean, user-friendly apps and exploring AI/ML integration.
           </Text>
         </View>
 
@@ -66,7 +57,7 @@ export default function AboutMe() {
                 style={styles.linkCard}
                 onPress={() => Linking.openURL(item.url)}
               >
-                <Text style={styles.linkText}>{item.name}</Text>
+                {item.icon}
               </TouchableOpacity>
             ))}
           </View>
@@ -76,73 +67,23 @@ export default function AboutMe() {
   );
 }
 
-
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#000000", 
-    opacity:0.70
-  },
-  content: {
-    padding: 24,
-  },
-
-  
-  profile: {
-    alignItems: "center",
-    marginBottom: 30,
-    marginTop: 20,
-  },
-  avatar: {
-    width: 96,
-    height: 96,
-    borderRadius: 48,
-    marginBottom: 12,
-  },
-  name: {
-    fontSize: 22,
-    fontWeight: "700",
-    color: "#FFFFFF", 
-  },
-  role: {
-    fontSize: 14,
-    color: "green",
-    marginTop: 2,
-  },
-
-  
-  section: {
-    marginBottom: 28,
-  },
-  sectionTitle: {
-    fontSize: 16,
-    fontWeight: "700",
-    color: "maroon",
-    marginBottom: 10,
-  },
-  aboutText: {
-    fontSize: 14,
-    lineHeight: 21,
-    color: "#E5E7EB", 
-  },
-
-  
-  linksWrap: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: 10,
-  },
+  container: { flex: 1, backgroundColor: "#E0F2FE" },
+  content: { padding: 24 },
+  profile: { alignItems: "center", marginBottom: 20, marginTop: 10 },
+  avatar: { width: 90, height: 90, borderRadius: 45, marginBottom: 10 },
+  name: { fontSize: 20, fontWeight: "700", color: "black" },
+  role: { fontSize: 14, color: "#A5B4FC", marginTop: 2 },
+  section: { marginBottom: 24 },
+  sectionTitle: { fontSize: 16, fontWeight: "700", color: "orange", marginBottom: 8 },
+  aboutText: { fontSize: 14, lineHeight: 20, color: "black" },
+  linksWrap: { flexDirection: "row", flexWrap: "wrap", gap: 12 },
   linkCard: {
-    paddingVertical: 10,
-    paddingHorizontal: 18,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: "#374151", 
-    backgroundColor: "#1F2937", 
-  },
-  linkText: {
-    fontSize: 14,
-    fontWeight: "600",
-    color: "yellow", 
+    width: 50,
+    height: 50,
+    borderRadius: 12,
+    backgroundColor: "#1F2937",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
