@@ -12,7 +12,6 @@ import {
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import axios from "axios";
-import MovingBackground from "../components/MovingBackground";
 
 const BACKEND_URL = "https://kanect-backend.onrender.com/api/questions";
 
@@ -84,7 +83,7 @@ export default function Create() {
 
   return (
     <View style={{ flex: 1 }}>
-      <MovingBackground />
+      
 
       <ScrollView contentContainerStyle={styles.container}>
         <Text style={styles.title}>Create Post</Text>
